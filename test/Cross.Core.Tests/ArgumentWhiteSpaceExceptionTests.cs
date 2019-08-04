@@ -103,7 +103,7 @@ namespace Cross.Core.Tests
             var actualValue = null as object;
             var innerException = null as Exception;
             var paramName = "ParameterName";
-            var message = $"Exception of type 'Cross.BuildingBlocks.Core.ArgumentWhiteSpaceException' was thrown.\r\nParameter name: {paramName}";
+            var message = $"Exception of type 'Cross.Core.ArgumentWhiteSpaceException' was thrown.\r\nParameter name: {paramName}";
 
             // act
             var result = new ArgumentWhiteSpaceException(paramName);
@@ -123,7 +123,7 @@ namespace Cross.Core.Tests
             var actualValue = new Uri("https://test.com");
             var innerException = null as Exception;
             var paramName = "ParameterName";
-            var message = $"Exception of type 'Cross.BuildingBlocks.Core.ArgumentWhiteSpaceException' was thrown.\r\nParameter name: {paramName}";
+            var message = $"Exception of type 'Cross.Core.ArgumentWhiteSpaceException' was thrown.\r\nParameter name: {paramName}";
 
             // act
             var result = new ArgumentWhiteSpaceException(paramName, actualValue);
@@ -165,7 +165,7 @@ namespace Cross.Core.Tests
             var actualValue = new Uri("https://test.com");
             var innerException = new RankException();
             var paramName = "ParameterName";
-            var message = $"Exception of type 'Cross.BuildingBlocks.Core.ArgumentWhiteSpaceException' was thrown.\r\nParameter name: {paramName}";
+            var message = $"Exception of type 'Cross.Core.ArgumentWhiteSpaceException' was thrown.\r\nParameter name: {paramName}";
 
             // act
             var result = new ArgumentWhiteSpaceException(paramName, actualValue, innerException);

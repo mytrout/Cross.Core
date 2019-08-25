@@ -8,7 +8,7 @@ variables:
   major: '1'
   minor: '0'
   iteration: '1'
-  patch: '[int]$(Build.BuildId)%65535'
+  patch: ${{ format('{0}', [int]$(Build.BuildId)%65535) }}
 
 steps:
 - task: RegExMatchReplace@2

@@ -29,7 +29,7 @@ namespace Cross.Core
     /// This interface should be explicity implemented to allow inheritance chains to work appropriately.
     /// </summary>
     /// <typeparam name="T">The type being copied.</typeparam>
-    public interface ICopy<T>
+    public interface ICopy<out T>
     {
         /// <summary>
         /// Provides a deep copy of the implementing instance of <typeparamref name="T"/>.

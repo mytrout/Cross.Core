@@ -30,10 +30,12 @@ namespace Cross.Core.Tests
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public class SampleClass1
     {
+#pragma warning disable CA1822
         public Guid Id => new Guid("{AA5CBFFE-88CF-4475-98CD-D8B717B82221}");
 
         public string Description => "Description";
 
         public int Count => 15;
+#pragma warning restore CA1822
     }
 }

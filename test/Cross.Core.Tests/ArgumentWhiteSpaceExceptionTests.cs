@@ -43,7 +43,7 @@ namespace Cross.Core.Tests
             var message = "message";
             var paramName = "ParameterName";
 
-            var expectedMessage = $"{message}\r\nParameter name: {paramName}";
+            var expectedMessage = $"{message} (Parameter '{paramName}')";
 
             // act
             var result = new ArgumentWhiteSpaceException(paramName, actualValue, message, innerException);
@@ -103,7 +103,7 @@ namespace Cross.Core.Tests
             var actualValue = null as object;
             var innerException = null as Exception;
             var paramName = "ParameterName";
-            var message = $"Exception of type 'Cross.Core.ArgumentWhiteSpaceException' was thrown.\r\nParameter name: {paramName}";
+            var message = $"Value does not fall within the expected range. (Parameter '{paramName}')";
 
             // act
             var result = new ArgumentWhiteSpaceException(paramName);
@@ -123,7 +123,7 @@ namespace Cross.Core.Tests
             var actualValue = new Uri("https://test.com");
             var innerException = null as Exception;
             var paramName = "ParameterName";
-            var message = $"Exception of type 'Cross.Core.ArgumentWhiteSpaceException' was thrown.\r\nParameter name: {paramName}";
+            var message = $"Value does not fall within the expected range. (Parameter '{paramName}')";
 
             // act
             var result = new ArgumentWhiteSpaceException(paramName, actualValue);
@@ -145,7 +145,7 @@ namespace Cross.Core.Tests
             var paramName = "ParameterName";
             var message = "message";
 
-            var expectedMessage = $"{message}\r\nParameter name: {paramName}";
+            var expectedMessage = $"{message} (Parameter '{paramName}')";
 
             // act
             var result = new ArgumentWhiteSpaceException(paramName, actualValue, message);
@@ -165,7 +165,7 @@ namespace Cross.Core.Tests
             var actualValue = new Uri("https://test.com");
             var innerException = new RankException();
             var paramName = "ParameterName";
-            var message = $"Exception of type 'Cross.Core.ArgumentWhiteSpaceException' was thrown.\r\nParameter name: {paramName}";
+            var message = $"Value does not fall within the expected range. (Parameter '{paramName}')";
 
             // act
             var result = new ArgumentWhiteSpaceException(paramName, actualValue, innerException);
@@ -187,7 +187,7 @@ namespace Cross.Core.Tests
             var message = "message";
             var paramName = "ParameterName";
 
-            var expectedMessage = $"{message}\r\nParameter name: {paramName}";
+            var expectedMessage = $"{message} (Parameter '{paramName}')";
 
             // act
             var result = new ArgumentWhiteSpaceException(paramName, message, innerException);
@@ -209,7 +209,7 @@ namespace Cross.Core.Tests
             var message = "message";
             var paramName = "ParameterName";
 
-            var expectedMessage = $"{message}\r\nParameter name: {paramName}";
+            var expectedMessage = $"{message} (Parameter '{paramName}')";
 
             // act
             var result = new ArgumentWhiteSpaceException(paramName, message);
@@ -231,7 +231,7 @@ namespace Cross.Core.Tests
             var message = "message";
             var paramName = "ParameterName";
 
-            var expectedMessage = $"{message}\r\nParameter name: {paramName}";
+            var expectedMessage = $"{message} (Parameter '{paramName}')";
 
             var source = new ArgumentWhiteSpaceException(paramName, actualValue, message, innerException);
 

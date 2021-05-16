@@ -31,4 +31,4 @@ jobs:
       # The Create Package step is unnecessary because the dotnet build step already builds it.
 
       - name: Publish the package to GitHub.
-        run: dotnet nuget push "./src/Cross.Core/bin/Release/*.nupkg" --api-key ${{ secrets.GITHUB_TOKEN }} --source "github""
+        run: dotnet nuget push "./src/Cross.Core/bin/Release/*.nupkg" --api-key ${{ secrets.GITHUB_TOKEN }} --source "github"

@@ -22,11 +22,11 @@ jobs:
       - name: Upload dotnet test results
         uses: actions/upload-artifact@v2
         with:
-          name: dotnet-results
+          name: test-results
           path: TestResults
           # Use always() to always run this step to publish test results when there are test failures
         if: ${{ always() }}
-      #- name: Create the package
-      #  run: dotnet pack --configuration Release src/Cross.Core/Cross.Core.csproj
-      - name: Publish the package to GPR
-        run: dotnet nuget push src/Cross.Core/bin/Release/*.nupkg
+      - name: Create the package
+        run: dotnet pack ./src/Cross.Core/Cross.Core.csproj --configuration Release 
+      #- name: Publish the package to GPR
+      #  run: dotnet nuget push ./src/Cross.Core/bin/Release/**/*.nupkg

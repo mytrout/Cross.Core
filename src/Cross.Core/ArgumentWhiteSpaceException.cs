@@ -26,13 +26,10 @@
 namespace Cross.Core
 {
     using System;
-    using System.Runtime.Serialization;
-    using System.Security.Permissions;
 
     /// <summary>
     /// Provides an <see cref="ArgumentException"/> for arguments that are whitespace.
     /// </summary>
-    [Serializable]
     public sealed class ArgumentWhiteSpaceException : ArgumentException
     {
         /// <summary>
@@ -136,40 +133,9 @@ namespace Cross.Core
             this.ActualValue = actualValue;
         }
 
-        // Constructor should be protected for unsealed classes, private for sealed classes.
-        // The Serializer invokes this constructor through reflection, so it can be private for sealed classes.
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ArgumentWhiteSpaceException" /> class with serialized data.
-        /// </summary>
-        /// <param name="info">The object that holds the serialized object data.</param>
-        /// <param name="context">An object that describes the source or destination of the serialized data.</param>
-        /// <remarks>This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <a href="https://docs.microsoft.com/en-us/dotnet/standard/serialization/xml-and-soap-serialization?view=netframework-4.8">XML and SOAP Serialization</a>.</remarks>
-        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
-        private ArgumentWhiteSpaceException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-            string actualValueType = info.GetString("ActualValueType");
-            Type typeOfValue = Type.GetType(actualValueType);
-            this.ActualValue = info.GetValue("ActualValue", typeOfValue);
-        }
-
         /// <summary>
         /// Gets the actual value of the argument.
         /// </summary>
         public object ActualValue { get; private set; }
-
-        /// <inheritdoc />
-        public override void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            if (info == null)
-            {
-                throw new ArgumentNullException(nameof(info));
-            }
-
-            info.AddValue("ActualValueType", this.ActualValue.GetType().AssemblyQualifiedName);
-            info.AddValue("ActualValue", this.ActualValue);
-            base.GetObjectData(info, context);
-        }
     }
 }

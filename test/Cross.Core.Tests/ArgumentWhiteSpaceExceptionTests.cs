@@ -27,8 +27,6 @@ namespace Cross.Core.Tests
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
-    using System.IO;
-    using System.Runtime.Serialization.Formatters.Binary;
 
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [TestClass]
@@ -220,64 +218,6 @@ namespace Cross.Core.Tests
             Assert.AreEqual(innerException, result.InnerException);
             Assert.AreEqual(expectedMessage, result.Message);
             Assert.AreEqual(paramName, result.ParamName);
-        }
-
-        [TestMethod]
-        public void Returns_Valid_ArgumentWhiteSpaceException_From_Serialization_Constructor()
-        {
-            // arrange
-            var actualValue = new Uri("https://me.local");
-            var innerException = new ArgumentNullException("NullParameterName");
-            var message = "message";
-            var paramName = "ParameterName";
-
-            var expectedMessage = $"{message} (Parameter '{paramName}')";
-
-            var source = new ArgumentWhiteSpaceException(paramName, actualValue, message, innerException);
-
-            // act
-            ArgumentWhiteSpaceException result = null;
-
-            var formatter = new BinaryFormatter();
-            using (var stream = new MemoryStream())
-            {
-                // "Save" object state
-                formatter.Serialize(stream, source);
-
-                // Re-use the same stream for de-serialization
-                stream.Seek(0, 0);
-                result = formatter.Deserialize(stream) as ArgumentWhiteSpaceException;
-            }
-
-            // assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(actualValue, result.ActualValue);
-            Assert.IsInstanceOfType(result.InnerException, innerException.GetType());
-            Assert.AreEqual(innerException.Message, result.InnerException.Message);
-            Assert.AreEqual(innerException.ParamName, (result.InnerException as ArgumentNullException).ParamName);
-            Assert.AreEqual(expectedMessage, result.Message);
-            Assert.AreEqual(paramName, result.ParamName);
-        }
-
-        [TestMethod]
-        public void Throws_ArgumentNullException_From_GetObjectData_When_SerializationInfo_Parameter_Is_Null()
-        {
-            // arrange
-            var actualValue = new Uri("https://me.local");
-            var innerException = new ArgumentNullException("NullParameterName");
-            var message = "message";
-            var paramName = "ParameterName";
-
-            var source = new ArgumentWhiteSpaceException(paramName, actualValue, message, innerException);
-
-            var expectedParamName = "info";
-
-            // act
-            var result = Assert.ThrowsException<ArgumentNullException>(() => source.GetObjectData(null, default));
-
-            // assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(expectedParamName, result.ParamName);
         }
     }
 }

@@ -103,7 +103,7 @@ namespace Cross.Core.Extensions.Tests
             }
             finally
             {
-                Directory.Delete($"{directory}", true);
+                Directory.Delete($"{directory}/", true);
             }
         }
     }

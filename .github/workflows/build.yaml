@@ -28,6 +28,7 @@ jobs:
         if: ${{ always() }}
       
       # The Create Package step is unnecessary because the dotnet build step already builds it.
-      
+      - name: Add nuget source 
+        run: dotnet nuget add source --username mytrout --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/mytrout/index.json"
       - name: Publish the package to GPR
         run: dotnet nuget push "./src/Cross.Core/bin/Release/*.nupkg" --source "github"

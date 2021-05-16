@@ -8,7 +8,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout the Source
+        uses: actions/checkout@v2
       - name: Setup .NET Core SDK 5.0.x
         uses: actions/setup-dotnet@v1.7.2
         with:
@@ -28,7 +29,6 @@ jobs:
         if: ${{ always() }}
       
       # The Create Package step is unnecessary because the dotnet build step already builds it.
-      - name: Add nuget source 
-        run: dotnet nuget add source --username mytrout --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/mytrout/index.json"
-      - name: Publish the package to GPR
-        run: dotnet nuget push "./src/Cross.Core/bin/Release/*.nupkg" --source "github"
+
+      - name: Publish the package to GitHub.
+        run: dotnet nuget push "./src/Cross.Core/bin/Release/*.nupkg" --apiKey ${{ secrets.GITHUB_TOKEN }}

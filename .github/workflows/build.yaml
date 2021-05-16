@@ -25,7 +25,7 @@ jobs:
           name: dotnet-results
           path: TestResults
           # Use always() to always run this step to publish test results when there are test failures
-          if: ${{ always() }}
+        if: ${{ always() }}
       #- name: Create the package
       #  run: dotnet pack --configuration Release src/Cross.Core/Cross.Core.csproj
       - name: Publish the package to GPR

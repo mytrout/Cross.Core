@@ -28,6 +28,7 @@ namespace Cross.Core.Extensions.Tests
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
     using System.IO;
+    using System.Reflection;
     using System.Runtime.InteropServices;
 
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
@@ -86,11 +87,7 @@ namespace Cross.Core.Extensions.Tests
             Guid newGuid = Guid.NewGuid();
             string input = "input";
 
-            string directory = $"C:/{newGuid}";
-            if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-                directory = "/net-testing";
-            }
+            string directory = Directory.GetCurrentDirectory() + "/special-test";
 
             string fileName = $"{newGuid}.txt";
 
@@ -103,7 +100,12 @@ namespace Cross.Core.Extensions.Tests
             }
             finally
             {
-                Directory.Delete($"{directory}/", true);
+                // Only run this deletion on Windows platforms, it causes *nix to fail
+                // with "tem.IO.DirectoryNotFoundException: Could not find a part of the path '/net-testing'."
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    Directory.Delete($"{directory}", true);
+                }
             }
         }
     }

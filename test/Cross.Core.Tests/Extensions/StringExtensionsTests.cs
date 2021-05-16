@@ -28,6 +28,7 @@ namespace Cross.Core.Extensions.Tests
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
     using System.IO;
+    using System.Runtime.InteropServices;
 
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [TestClass]
@@ -84,20 +85,26 @@ namespace Cross.Core.Extensions.Tests
             // assert
             Guid newGuid = Guid.NewGuid();
             string input = "input";
-            string directory = $"C:\\{newGuid}";
+
+            string directory = $"C:/{newGuid}";
+            if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                directory = "/net-testing";
+            }
+
             string fileName = $"{newGuid}.txt";
 
             try
             {
                 StringExtensions.WriteToFile(input, directory, fileName);
 
-                string result = File.ReadAllText($"{directory}\\{fileName}");
+                string result = File.ReadAllText($"{directory}/{fileName}");
                 Assert.AreEqual(input, result);
             }
             finally
             {
-                File.Delete($"{directory}\\{fileName}");
-                Directory.Delete($"{directory}\\");
+                File.Delete($"{directory}/{fileName}");
+                Directory.Delete($"{directory}");
             }
         }
     }

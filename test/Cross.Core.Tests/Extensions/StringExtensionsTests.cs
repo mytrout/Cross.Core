@@ -97,7 +97,7 @@ namespace Cross.Core.Extensions.Tests
             finally
             {
                 File.Delete($"{directory}\\{fileName}");
-                Directory.Delete(directory);
+                Directory.Delete($"{directory}\\");
             }
         }
     }
